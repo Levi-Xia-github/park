@@ -18,18 +18,6 @@ class DataTest extends BaseAction
     public function index(){
 
        $_serviceUser = new UserService();
-
-//       $id = $this->_getInput('id',0);
-        return $this->success($this->_userId);
-//        return $_serviceUser->delete(
-//            [
-//                ['id','<',25],
-//            ]);
-//       return $_serviceUser->update(301,['username' =>  '帅哥','password' => 666]);
-//       return $_serviceUser->query('select * from tp_user limit 2 ');
-//       return $_serviceUser->insert();
-//       return $_serviceUser->find($id);
-//       return $_serviceUser->select();
-
+       
     }
 }

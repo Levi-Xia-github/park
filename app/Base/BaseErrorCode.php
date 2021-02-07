@@ -12,6 +12,7 @@ class BaseErrorCode {
     const REQUEST_ERROR        = 103;
 
     const USER_NOT_LOGIN       = 201;
+    const USER_NOT_REGISTER    = 202;
 
     const UNKNOWN              = 999;
 
@@ -24,6 +25,7 @@ class BaseErrorCode {
         103 => "网速缓慢…",
 
         201 => '请先登录',
+        202 => '请先注册',
 
         999 => 'unknown error',
 

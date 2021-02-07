@@ -2,16 +2,16 @@ USE park
 
 --用户表
 CREATE TABLE `park_user`(
-  `id` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
-  `userId` bigint(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户Id',
+  `userId` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
   `realName` varchar(32) NOT NULL DEFAULT '' COMMENT '真实姓名 ',
+  `passWord` varchar(128) NOT NULL DEFAULT '' COMMENT '密码',
+  `mobile` varchar(32) NOT NULL DEFAULT '' COMMENT '手机号',
   `cardType` tinyint(1) NOT NULL DEFAULT '1' COMMENT '证件类型：1 身份证，2 军官证，3 护照',
   `cardId` varchar(64) NOT NULL DEFAULT '' COMMENT '证件号',
   `stat` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 正常 1 标记删除',
   `createTime` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updateTime` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_userid` (`userId`)
+  PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100000000 DEFAULT CHARSET=utf8 COMMENT '用户信息';
 
 --地址表

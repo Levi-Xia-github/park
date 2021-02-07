@@ -7,7 +7,7 @@ use app\Base\BaseAction;
 use app\Base\BaseErrorCode;
 use app\Base\BaseException;
 use app\Common\Passport;
-use app\Service\UserService;
+use app\Service\User\UserService;
 use think\App;
 
 class DataTest extends BaseAction
@@ -18,6 +18,6 @@ class DataTest extends BaseAction
     public function index(){
 
        $_serviceUser = new UserService();
-       
+
     }
 }

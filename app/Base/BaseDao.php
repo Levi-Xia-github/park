@@ -19,7 +19,7 @@ class BaseDao
 
     public function find($id){
         $_dbConn = self::getDb();
-        return $_dbConn->where($this->_pkey,$id)->find();
+        return $_dbConn->where($this->_pkey,$id)->find()->toArray();
     }
 
     public function select($fields , $conds = NULL , $limit= NULL , $order= NULL , $group = NULL){
@@ -30,7 +30,7 @@ class BaseDao
         !empty($group) && $ret = $ret->group($group);
         !empty($order) && $ret = $ret->order($order);
         !empty($limit) && $ret = $ret->limit($limit[0],$limit[1]);
-        $ret = $ret->select();
+        $ret = $ret->select()->toArray();
         //return DB::getLastSql();
         return $ret;
     }

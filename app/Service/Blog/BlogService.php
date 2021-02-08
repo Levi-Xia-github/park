@@ -45,9 +45,29 @@ class BlogService extends BaseService
 
     }
 
+    public function getBlogByAuditSts($auditSts,$sortId,$num){
+        if(empty($auditSts) || !in_array($auditSts,['HOT','PASS','NOPASS','BAN'])){
+            throw new BaseException(BaseErrorCode::PARAM_ERROR);
+        }
+        if(empty($num)){
+            return [];
+        }
+        $ret = $this->_daoBlog->getBlogByAuditSts($auditSts,$sortId,$num);
+        return $ret;
+    }
+
     public function updateBlog($blogId,$updateBlogInfo){
 
     }
+
+    public function buildBlogDetails($blogList){
+        if(empty($blogList)){
+            throw new BaseException(BaseErrorCode::PARAM_ERROR);
+        }
+        //build点赞量，浏览量，评论量
+    }
+
+
 
 
 

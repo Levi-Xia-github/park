@@ -52,7 +52,8 @@ class BlogService extends BaseService
         if(empty($num)){
             return [];
         }
-        $ret = $this->_daoBlog->getBlogByAuditSts($auditSts,$sortId,$num);
+        $blogListRet = $this->_daoBlog->getBlogByAuditSts($auditSts,$sortId,$num);
+        $ret = $this->buildBlogDetails($blogListRet);
         return $ret;
     }
 
@@ -62,9 +63,11 @@ class BlogService extends BaseService
 
     public function buildBlogDetails($blogList){
         if(empty($blogList)){
-            throw new BaseException(BaseErrorCode::PARAM_ERROR);
+            return [];
         }
         //build点赞量，浏览量，评论量
+
+        return $blogList;
     }
 
 

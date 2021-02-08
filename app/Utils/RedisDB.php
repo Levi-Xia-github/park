@@ -1,11 +1,9 @@
 <?php
+namespace app\Utils;
 
-//$redis = new redis();  //实例化
-//$redis->connect('39.97.184.172',6379);  //连接
-//$redis->set('dog','xxx');
-//echo $redis->get('dog');
+use think\facade\Config;
 
-class  Common_RedisDB{
+class  RedisDB{
 
     private $redis ; //redis对象
 
@@ -17,9 +15,10 @@ class  Common_RedisDB{
      * )
      * @param array $config
      */
-    function __construct($config){
-        $this ->redis = new Redis();
-        $this ->redis->connect($config['ip'],$config['port']);
+    function __construct(){
+        $this ->redis = new \Redis();
+        $redisConf = Config::get('myconf.remoteRedis');
+        $this ->redis->connect($redisConf['ip'],$redisConf['port']);
         return $this ->redis;
     }
 

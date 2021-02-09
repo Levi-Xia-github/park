@@ -9,7 +9,7 @@ use app\Base\BaseErrorCode;
 use app\Base\BaseException;
 use app\Service\Blog\BlogService;
 
-class addBlog extends BaseAction
+class AddBlog extends BaseAction
 {
     protected  $_checkLogin = true;
     protected  $_needLogin = true;

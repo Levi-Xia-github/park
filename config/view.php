@@ -24,8 +24,8 @@ return [
     'taglib_end'    => '}',
     //模版替换输出
     'tpl_replace_string' => [
-        '__JS__' => '../static',
-        '__CSS__' => '../static', ],
+        '__JS__' => 'static',
+        '__CSS__' => 'static', ],
     //模版布局
 //    'layout_on' => true,
 //    'layout_name' => 'public/layout',

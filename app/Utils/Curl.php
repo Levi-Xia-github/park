@@ -1,6 +1,9 @@
-
 <?php
-class  Common_Curl{
+
+
+namespace app\Utils;
+
+class  Curl{
     /**
      * 多种请求方法封装
      * 
@@ -47,32 +50,41 @@ class  Common_Curl{
         return $res;
     }
 
-    public static function post($url,  $data = [],$header = ["Content-type:application/json;charset=utf-8", "Accept:application/json"])
-    {
+    public static function post( $url, $data=[] ,$header = ["Content-type:application/json;charset=utf-8", "Accept:application/json"] ) {
+
         //初始化
-        $url = str_replace(' ','+',$url);
-        $ch = curl_init();
-        //设置桥接(抓包)
-        //curl_setopt($ch, CURLOPT_PROXY, '127.0.0.1:8888');
-        //设置请求地址
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch,CURLOPT_TIMEOUT,3);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        //设置请求方法
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        //设置请求头
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        //设置请求数据
-        if (!empty($data)) {
-            curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
+        $curl = curl_init();
+        //设置抓取的url
+        curl_setopt($curl, CURLOPT_URL, $url);
+        //设置头文件的信息作为数据流输出
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        //设置获取的信息以文件流的形式返回，而不是直接输出。
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        // 超时设置
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+
+        // 超时设置，以毫秒为单位
+        // curl_setopt($curl, CURLOPT_TIMEOUT_MS, 500);
+
+        // 设置请求头
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE );
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE );
+
+        //设置post方式提交
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        //执行命令
+        $data = curl_exec($curl);
+
+        // 显示错误信息
+        if (curl_error($curl)) {
+            print "Error: " . curl_error($curl);
+        } else {
+            // 打印返回的内容
+            var_dump($data);
+            curl_close($curl);
         }
-        //设置curl_exec()的返回值以字符串返回
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $res = curl_exec($ch);
-        $res = json_decode($res);
-        curl_close($ch); 
-        return $res;
     }
 }

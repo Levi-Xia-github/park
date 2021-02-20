@@ -39,7 +39,7 @@ class BaseAction extends BaseController
         if(empty($view) || !is_array($paramArr)){
             throw new Exception("传入错误");
         }
-        return View::fetch('view',$paramArr);
+        return View::fetch($view,$paramArr);
     }
 
     protected function _login()

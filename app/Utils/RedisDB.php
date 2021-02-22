@@ -17,8 +17,9 @@ class  RedisDB{
      */
     function __construct(){
         $this ->redis = new \Redis();
-        $redisConf = Config::get('myconf.remoteRedis');
-        $this ->redis->connect($redisConf['ip'],$redisConf['port']);
+        $hostname = config('redis.redis.hostname');
+        $port = config('redis.redis.port');
+        $this ->redis->connect($hostname,$port);
         return $this ->redis;
     }
 
@@ -175,8 +176,8 @@ class  RedisDB{
      *                // ASC 根据圆心位置，从近到远的返回元素
      *                // DESC 根据圆心位置，从远到近的返回元素
      */
-    public function geoRadius($key , $longitude , $latitude , $range , $unit , $option ){
-        return $this->redis->rawCommand('georadius', $key, $longitude , $latitude , $range , $unit , $option );
+    public function geoRadius($key , $longitude , $latitude , $range , $unit , $option , $order , $num = 50){
+        return $this->redis->rawCommand('georadius', $key, $longitude , $latitude , $range , $unit , $option ,$order , 'COUNT',$num);
     }
 
     /**
@@ -192,6 +193,13 @@ class  RedisDB{
      */
     public function geoRadiusByMember($key , $name , $range , $unit='m'){
         return $this->redis->rawCommand('georadiusbymember', $key, $name, $range , $unit);
+    }
+
+    /**
+     * 删除geo数据
+     */
+    public function geoZrem($key,$name){
+        return $this->redis->rawCommand('Zrem', $key, $name);
     }
 
 }

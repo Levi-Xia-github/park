@@ -211,4 +211,17 @@ class  Map{
         return $ret;
     }
 
+    public static function distanceOfTwoPosition($mode,$from,$to,$output='json',$callback=''){
+        $data['key'] = self::$_key;
+        !empty($mode) && $data['mode'] = $mode;
+        !empty($from) && $data['from'] = $from;
+        !empty($to) && $data['to'] = $to;
+        !empty($output) && $data['output'] = $output;
+        !empty($callback) && $data['callback'] = $callback;
+
+        $url = 'https://apis.map.qq.com/ws/distance/v1/matrix/?from=' . $from . '&to=' . $to;
+        $ret = Curl::get($url,$data);
+        return $ret;
+    }
+
 }

@@ -20,6 +20,8 @@ class BaseErrorCode {
 
     const DB_QUERY_ERROR = 1001;
 
+    const POSITION_FAILED = 10001;
+
     public static $codes = array(
         0 => 'ok',
         101 => 'param error',
@@ -34,6 +36,8 @@ class BaseErrorCode {
         999 => 'unknown error',
 
         1001 => 'db query failed',
+
+        10001 => '定位失败，请检查是否开启定位服务',
 
     );
 }

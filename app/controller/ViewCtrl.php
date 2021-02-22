@@ -13,7 +13,7 @@ class ViewCtrl extends BaseAction
             'name' => '张三',
             'age' => 18,
         ];
-        return $this->buildOutput('index/index',$data);
+        return $this->success($data,'index/index');
     }
 
 }

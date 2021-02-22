@@ -1,0 +1,123 @@
+{extend name='public/base'}
+
+{block name='content'}
+
+<div class="layui-fluid">
+
+    <div class="layui-row">
+        <div class="layui-tab">
+            <ul class="layui-tab-title">
+                <li class="layui-this">共享车位列表</li>
+                <li>添加共享车位</li>
+                <li>到期未还车位</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-row">
+                        <table class="layui-table">
+                            <thead>
+                                <tr>
+                                    <th>车位Id</th>
+                                    <th>地址</th>
+                                    <th>描述</th>
+                                    <th>经度</th>
+                                    <th>纬度</th>
+                                    <th>是否精确</th>
+                                    <th>首图</th>
+                                    <th>图片列表</th>
+                                    <th>租金</th>
+                                    <th>车位状态</th>
+                                    <th>备注</th>
+                                    <th>创建时间</th>
+                                    <th>更新时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {foreach $shareParkList as $key => $value}
+                                    <tr>
+                                        <td>{$value.spaceId}</td>
+                                        <td>{$value.address}</td>
+                                        <td>{$value.desc}</td>
+                                        <td>{$value.longitude}</td>
+                                        <td>{$value.latitude}</td>
+                                        <td>{$value.exact}</td>
+                                        <td>{$value.facePic}</td>
+                                        <td>{$value.picList}</td>
+                                        <td>{$value.price}</td>
+                                        <td>{$value.status}</td>
+                                        <td>{$value.remark}</td>
+                                        <td>{$value.createTime}</td>
+                                        <td>{$value.updateTime}</td>
+                                    </tr>
+                                {/foreach}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    <div class="layui-row">
+                        <form class="layui-form" action="/backstage.ShareParkManage" method="post">
+                            <input type="hidden" name="command" value="add">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">详细地址</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="address" required  lay-verify="required" placeholder="请输入详细地址" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">描述</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="desc" required  lay-verify="required" placeholder="请输入描述" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">经纬度</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="longitude" required  lay-verify="required" placeholder="经度" autocomplete="off" class="layui-input">
+                                    <input type="text" name="latitude" required  lay-verify="required" placeholder="纬度" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">是否是精确位置</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="exact" value="0" title="精确">
+                                    <input type="radio" name="exact" value="1" title="模糊" checked>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">图片key</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="picList" required  lay-verify="required" placeholder="图片key（#分割）" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">价格</label>
+                                <div class="layui-input-block">
+                                    <input type="number" name="price" required  lay-verify="required" placeholder="请输入价格" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">备注</label>
+                                <div class="layui-input-block">
+                                    <textarea name="remark" placeholder="请输入内容" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="layui-tab-item">内容3</div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name='foot'}
+{/block}

@@ -35,9 +35,16 @@ class BaseAction extends BaseController
         return $ret;
     }
 
-    public function buildOutput($view,$paramArr=[]){
-        if(empty($view) || !is_array($paramArr)){
-            throw new Exception("传入错误");
+    public function success($paramArr=[],$view=''){
+        if(!is_array($paramArr)){
+            throw new BaseException(BaseErrorCode::PARAM_ERROR);
+        }
+        if(empty($view)){
+            $output = [];
+            $output['errCode'] = 0;
+            $output['errMsg'] = 'ok';
+            $output['data'] = $paramArr;
+            return json($output);
         }
         return View::fetch($view,$paramArr);
     }
@@ -61,14 +68,5 @@ class BaseAction extends BaseController
         }
         return;
     }
-
-    protected function success($data){
-        $output = [];
-        $output['errCode'] = 0;
-        $output['errMsg'] = 'ok';
-        $output['data'] = $data;
-        return json($output);
-    }
-
 
 }

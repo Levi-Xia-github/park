@@ -32,15 +32,16 @@ CREATE TABLE `park_loation` (
 CREATE TABLE `park_space` (
   `spaceId` bigint(11) unsigned NOT NULL AUTO_INCREMENT,
   `locId` bigint(11) unsigned NOT NULL DEFAULT '0' COMMENT '地址id',
-  `title` varchar(512) NOT NULL DEFAULT '' COMMENT '标题',
-  `content`  varchar(4096) NOT NULL DEFAULT '' COMMENT '内容',
+  `address`  varchar(128) NOT NULL DEFAULT '' COMMENT '地址',
+  `desc`  varchar(4096) NOT NULL DEFAULT '' COMMENT '描述',
   `longitude` varchar(20) NOT NULL DEFAULT '' COMMENT '经度',
   `latitude`  varchar(20) NOT NULL DEFAULT '' COMMENT '纬度',
   `exact` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0精确 1模糊',
   `facePic` varchar(64) NOT NULL DEFAULT '' COMMENT '首图',
   `picList` varchar(128) NOT NULL DEFAULT '' COMMENT '图片List',
-  `type`  tinyint(1) NOT NULL DEFAULT '0' COMMENT '0共享 1短租',
-  `price` int(10) unsigned NOT NULL COMMENT '租金/分',
+  `type`  tinyint(1) NOT NULL DEFAULT '0' COMMENT '0共享 1短租 2交易',
+  `price` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '租金/分',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未使用 1已锁定 2使用中',
   `startTime` int(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
   `endTime` int(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
   `remark` varchar(512) NOT NULL DEFAULT '' COMMENT '备注',
@@ -48,6 +49,7 @@ CREATE TABLE `park_space` (
   `createTime` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updateTime` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`spaceId`),
+  KEY `id_type` (`type`),
   KEY `idx_lat_lon` (`longitude`,`latitude`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100000000 DEFAULT CHARSET=utf8  COMMENT '车位信息表';
 

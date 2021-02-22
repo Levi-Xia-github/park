@@ -7,7 +7,7 @@ namespace app\controller;
 use app\Base\BaseAction;
 use app\Base\BaseErrorCode;
 use app\Base\BaseException;
-use app\Service\Blog\BlogService;
+use app\Service\Blog\ParkService;
 
 class AddBlog extends BaseAction
 {
@@ -16,7 +16,7 @@ class AddBlog extends BaseAction
 
     public function index()
     {
-        $_serviceUser = new BlogService();
+        $_serviceUser = new ParkService();
 
         $userId = $this->_userId;
         $title = $this->_getInput('title','');

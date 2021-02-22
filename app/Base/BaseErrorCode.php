@@ -14,6 +14,8 @@ class BaseErrorCode {
     const USER_NOT_LOGIN       = 201;
     const USER_NOT_REGISTER    = 202;
 
+    const JSON_FORMAT_ERROR    = 301;
+
     const UNKNOWN              = 999;
 
     const DB_QUERY_ERROR = 1001;
@@ -26,6 +28,8 @@ class BaseErrorCode {
 
         201 => '请先登录',
         202 => '请先注册',
+
+        301 => 'json数据格式错误',
 
         999 => 'unknown error',
 

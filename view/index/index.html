@@ -2,19 +2,25 @@
 
 {block name='content'}
 
-<div class="layui-fluid">
-    <div class="layui-row">
-        <div class="layui-col-xs6">
-            移动：6/12
-        </div>
-        <div class="layui-col-xs6">
-            移动：6/12
-        </div>
-    </div>
+<script type="text/javascript" src="https://mapapi.qq.com/web/mapComponents/geoLocation/v/geolocation.min.js"></script>
+
+<div id="btn-area">
+    <button onClick="geolocation.getLocation(showPosition, showErr, options)">获取精确定位信息</button>
 </div>
+<script type="text/JavaScript">
+    var geolocation = new qq.maps.Geolocation("OGTBZ-QETCP-VSID7-VJIKR-RRPM3-UBFAO", "yypark");
+
+    var options = {timeout: 8000};
+    function showPosition(position) {
+        alert(JSON.stringify(position, null, 4));
+    };
+    function showErr() {
+        alert(失败);
+    };
+
+</script>
 
 {/block}
 
 {block name='foot'}
-    <hr/>
 {/block}

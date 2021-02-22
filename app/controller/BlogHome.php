@@ -7,7 +7,7 @@ namespace app\controller;
 use app\Base\BaseAction;
 use app\Base\BaseErrorCode;
 use app\Base\BaseException;
-use app\Service\Blog\BlogService;
+use app\Service\Blog\ParkService;
 
 class BlogHome extends BaseAction
 {
@@ -16,7 +16,7 @@ class BlogHome extends BaseAction
 
     public function index()
     {
-        $_serviceUser = new BlogService();
+        $_serviceUser = new ParkService();
         $hotSortId = $this->_getInput('hotSortId',0);
         $passSortId = $this->_getInput('passSortId',0);
         $noPassSortId = $this->_getInput('noPassSortId',0);

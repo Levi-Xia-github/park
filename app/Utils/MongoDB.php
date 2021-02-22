@@ -1,9 +1,11 @@
 <?php
 
+
+namespace app\Utils;
 //示例化方式
 // $db = Common_MongoDB::i();         // 使用配置self::$_config[self::$def]
 // $collname = "record";
-class  Common_MongoDB{
+class  MongoDB{
  //--------------  定义变量  --------------//
  private static $ins = [];
  private static $def = "default";
@@ -12,7 +14,7 @@ class  Common_MongoDB{
  private static $_config = [
      "default" => [
          "url" => "mongodb://127.0.0.1:27017", 
-         "dbname" => "test"
+         "dbname" => "pic"
         ],
  ];
 
@@ -27,7 +29,7 @@ class  Common_MongoDB{
          $confkey = self::$def;
      }
      if (!isset(self::$ins[$confkey]) && ($conf = self::$_config[$confkey])) {
-         $m = new Common_MongoDB($conf);
+         $m = new MongoDB($conf);
          self::$ins[$confkey] = $m;
      }
      return self::$ins[$confkey];

@@ -10,8 +10,6 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-Route::get('think', function () {
-    return 'hello,ThinkPHP6!';
-});
+//Route::rule('park/index','Index/index');
+//Route::rule('park/viewctrl','ViewCtrl/index');
 
-Route::get('hello/:name', 'index/hello');

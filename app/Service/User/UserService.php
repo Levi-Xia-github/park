@@ -16,6 +16,14 @@ class UserService extends BaseService
         $this->_daoUser = new UserDao();
     }
 
+    public function getUserInfoById($userId){
+        if(empty($userId)){
+            throw new BaseException(BaseErrorCode::PARAM_ERROR);
+        }
+        $ret = $this->_daoUser->getUserInfoById($userId);
+        return $ret;
+    }
+
     public function getUserInfoByMobile($mobile){
         if(empty($mobile)){
             throw new BaseException(BaseErrorCode::PARAM_ERROR);

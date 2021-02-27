@@ -16,6 +16,14 @@ class ParkService extends BaseService
         $this->_daoPark = new ParkDao();
     }
 
+    public function getShareParkInfoById($spaceId){
+        if(empty($spaceId)){
+            throw new BaseException(BaseErrorCode::PARAM_ERROR);
+        }
+        $ret = $this->_daoPark->getShareParkInfoById($spaceId);
+        return $ret;
+    }
+
     public function getShareParkByIdList($IdList){
         if(!is_array($IdList)){
             throw new BaseException(BaseErrorCode::PARAM_ERROR);
@@ -28,7 +36,7 @@ class ParkService extends BaseService
     }
 
     public function getShareParkForBk(){
-        $ret = $this->_daoPark->getShareParkForBk(0,20);
+        $ret = $this->_daoPark->getShareParkForBk(20);
         return $ret;
     }
 

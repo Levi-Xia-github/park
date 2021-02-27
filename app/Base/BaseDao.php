@@ -37,7 +37,8 @@ class BaseDao
 
     public function insert($row){
         $_dbConn = self::getDb();
-        return $_dbConn->insert($row);
+        $_dbConn->insert($row);
+        return $_dbConn->getLastInsID();
     }
 
     public function query($sql){

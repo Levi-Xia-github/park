@@ -8,18 +8,33 @@ use app\Base\BaseAction;
 use app\Base\BaseErrorCode;
 use app\Base\BaseException;
 use app\Service\Park\ParkService;
+use app\Service\Search\SearchService;
+use app\Utils\ES;
 
+/**
+ * 后台发布共享车位e
+ */
 class ShareParkManage extends BaseAction
 {
     protected  $_checkLogin = true;
     protected  $_needLogin = true;
 
+    private $_parkService = NULL;
+    private $_searchService = NULL;
+    private $_client = NULL;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_parkService = new ParkService();
+        $_es =  new ES();
+        $this->_client = $_es->getConn();
+        $this->_searchService = new SearchService();
+    }
+
     public function index(){
 
-        $_parkSrvice = new ParkService();
-
         $command = $this->_getInput('command','view');
-
         switch ($command){
 
             case 'add':
@@ -36,17 +51,24 @@ class ShareParkManage extends BaseAction
                 }
                 $picArr = explode('#',$picList);
                 $facePic = $picArr[0];
-                $_parkSrvice->addShareParkForBk($address,$desc,$longitude,$latitude,$picList,$price,$remark,$facePic,$exact);
+                $insertId = $this->_parkService->addShareParkForBk($address,$desc,$longitude,$latitude,$picList,$price,$remark,$facePic,$exact);
+
+                //添加到es中去
+                if(empty($insertId)){
+                    throw new BaseException(BaseErrorCode::REQUEST_ERROR);
+                }
+                $this->_searchService->addPark($insertId,$address,$price,$longitude,$latitude,$exact);
                 break;
             case 'delete':
                 break;
         }
 
-        $shareParkList = $_parkSrvice->getShareParkForBk();
+        $shareParkList = $this->_parkService->getShareParkForBk();
         $data = [
             'shareParkList' => $shareParkList,
         ];
 
         return $this->success($data,'backstage/sharepark/parkmanage');
     }
+
 }
